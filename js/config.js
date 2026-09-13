@@ -7,9 +7,10 @@ window.NCVO_CONFIG = {
   // Leave empty and the form falls back to the visitor's own email app.
   contactEndpoint: '',
 
-  // The group's inbox. Leave empty until they choose one — the form will then
-  // point people at the Facebook group rather than open an empty mail draft.
-  contactEmail: '',
+  // The group's inbox. Also printed on the contact page, in every footer and in
+  // the structured data on index.html — change all of them together.
+  // Empty = the form points people at the Facebook group instead.
+  contactEmail: 'ncveteransoutdoors@yahoo.com',
 
   // Donation page (Zeffy, Givebutter, PayPal Giving Fund, etc.).
   // Leave empty and the Donate buttons stay pointed at the contact page.

@@ -100,7 +100,8 @@
       '?subject=' + encodeURIComponent('Website message: ' + (v.topic || 'General')) +
       '&body=' + encodeURIComponent(body);
 
-    setStatus('Opening your email app so you can send this to us.', 'ok');
+    setStatus('Opening your email app so you can send this to us. If nothing opens, email ' +
+              CFG.contactEmail + ' directly.', 'ok');
   }
 
   form.addEventListener('submit', function (e) {
