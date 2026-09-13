@@ -3,19 +3,20 @@
    Plain CSS, no build. Design tokens first.
    ========================================================================== */
 :root {
-  --pine-900: #14261c;
-  --pine-800: #1d3527;
-  --pine-700: #28483a;
-  --pine-500: #4d7360;
-  --moss-200: #d9e2d0;
-  --canvas:   #f6f2e8;
-  --paper:    #fffdf7;
-  --ink:      #1b211d;
-  --ink-soft: #4a524c;
-  --blaze:    #c8541d;   /* hunter orange, darkened to pass contrast on cream */
-  --blaze-lt: #f0873f;   /* for use on dark surfaces */
-  --flag-red: #a3262a;
-  --rule:     #d8d0bd;
+  /* Sampled from the group's multicam cover graphic (assets/ncvo-cover.jpg). */
+  --pine-900: #2b271d;   /* deep drab — header, footer, dark bands */
+  --pine-800: #3a3528;
+  --pine-700: #56503d;
+  --pine-500: #787460;   /* camo olive */
+  --moss-200: #d8d0c7;   /* camo light */
+  --canvas:   #f3efe7;
+  --paper:    #fbf8f2;
+  --ink:      #1f1c16;
+  --ink-soft: #524c40;
+  --blaze:    #7a5c2e;   /* coyote brown, darkened to pass contrast with white text */
+  --blaze-lt: #d9c29a;   /* camo tan, for use on dark surfaces */
+  --flag-red: #a3262a;   /* crisis only — deliberately not a brand colour */
+  --rule:     #d9d0c2;
 
   --radius: 10px;
   --max: 70rem;
@@ -92,16 +93,16 @@ a:hover { color: var(--blaze); }
 }
 .site-header .wrap {
   display: flex; align-items: center; justify-content: space-between;
-  gap: 1rem; min-height: 4.5rem;
+  gap: 1rem; min-height: 5rem;
 }
 .brand {
   display: flex; align-items: center; gap: .7rem;
   color: #fff; text-decoration: none;
 }
 .brand:hover { color: #fff; }
-.brand svg { width: 2.8rem; height: 2.8rem; flex: none; }
-.brand-name { font-family: var(--font-head); font-weight: 700; font-size: 1.15rem; line-height: 1.1; }
-.brand-name small { display: block; font-family: var(--font); font-weight: 500; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--moss-200); }
+.brand-badge { height: 4rem; width: auto; flex: none; border-radius: 6px; box-shadow: 0 0 0 1px rgba(255,255,255,.18); }
+/* Bold capitals, echoing the lettering across the top of the cover graphic. */
+.brand-name { font-family: var(--font); font-weight: 800; font-size: .92rem; line-height: 1.15; letter-spacing: .05em; text-transform: uppercase; }
 
 .nav-toggle {
   display: none;
@@ -117,8 +118,8 @@ a:hover { color: var(--blaze); }
 }
 #primary-nav a:hover { background: var(--pine-700); color: #fff; }
 #primary-nav a[aria-current="page"] { box-shadow: inset 0 -3px 0 var(--blaze-lt); border-radius: 0; }
-#primary-nav .nav-donate { background: var(--blaze); margin-left: .4rem; border-radius: 6px; }
-#primary-nav .nav-donate:hover { background: #a9440f; }
+#primary-nav .nav-donate { background: var(--blaze-lt); color: var(--pine-900); margin-left: .4rem; border-radius: 6px; }
+#primary-nav .nav-donate:hover { background: #c8ad80; color: var(--pine-900); }
 
 @media (max-width: 56rem) {
   .nav-toggle { display: inline-block; }
@@ -133,9 +134,9 @@ a:hover { color: var(--blaze); }
   #primary-nav a[aria-current="page"] { box-shadow: inset 4px 0 0 var(--blaze-lt); padding-left: 1rem; }
   #primary-nav .nav-donate { margin: .5rem 0 0; text-align: center; }
 }
-/* Narrow phones: the tagline wraps to three lines next to the Menu button. */
-@media (max-width: 26rem) {
-  .brand-name small { display: none; }
+/* Narrow phones: badge and Menu only — the name is on the badge and in its alt text. */
+@media (max-width: 28rem) {
+  .brand-name { display: none; }
 }
 /* Without JS the menu must still be reachable. */
 .no-js .nav-toggle { display: none; }
@@ -149,7 +150,7 @@ a:hover { color: var(--blaze); }
   font: inherit; font-weight: 700; text-decoration: none; cursor: pointer;
 }
 .btn-primary { background: var(--blaze); color: #fff; }
-.btn-primary:hover { background: #a9440f; color: #fff; }
+.btn-primary:hover { background: #5f4722; color: #fff; }
 .btn-ghost { border-color: currentColor; color: var(--pine-800); background: transparent; }
 .btn-ghost:hover { background: var(--pine-800); color: #fff; border-color: var(--pine-800); }
 .on-dark .btn-ghost { color: #fff; }
@@ -157,33 +158,37 @@ a:hover { color: var(--blaze); }
 .btn-row { display: flex; flex-wrap: wrap; gap: .75rem; }
 
 /* ---- Hero ---- */
-.hero {
-  position: relative; overflow: hidden;
-  background: linear-gradient(180deg, #2c4c3d 0%, var(--pine-800) 60%, var(--pine-900) 100%);
-  color: #fff;
-}
-.hero .wrap { position: relative; z-index: 1; padding: clamp(3.5rem, 9vw, 7rem) 0 clamp(7rem, 16vw, 11rem); }
+.hero { background: var(--pine-900); color: #fff; }
+.hero .wrap { padding: clamp(2.5rem, 6vw, 4.5rem) 0; }
 .hero h1 { color: #fff; max-width: 17ch; }
-.hero .lede { font-size: clamp(1.1rem, 2.2vw, 1.3rem); max-width: 40rem; color: #e6ede1; }
+.hero .lede { font-size: clamp(1.1rem, 2.2vw, 1.3rem); max-width: 40rem; color: #ece6da; }
 .eyebrow {
   display: inline-block; font-size: .8rem; font-weight: 700; letter-spacing: .16em;
   text-transform: uppercase; color: var(--blaze-lt); margin-bottom: .8rem;
 }
-.hero-ridge { position: absolute; left: 0; right: 0; bottom: -1px; width: 100%; height: auto; display: block; }
+/* The group's own cover graphic, shown whole. A blurred copy fills the band
+   either side on screens wider than the 960px original. */
+.hero-banner { position: relative; overflow: hidden; background: var(--pine-800); }
+.hero-banner::before {
+  content: ""; position: absolute; inset: -40px;
+  background: url("../assets/ncvo-cover.jpg") center / cover;
+  filter: blur(24px) brightness(.6);
+}
+.hero-banner img { position: relative; display: block; width: 100%; max-width: 960px; height: auto; margin-inline: auto; }
 
 .page-hero { background: var(--pine-800); color: #fff; }
 .page-hero .wrap { padding: clamp(2.5rem, 6vw, 4rem) 0; }
 .page-hero h1 { color: #fff; margin-bottom: .3em; }
-.page-hero p { color: #e6ede1; max-width: 42rem; margin: 0; font-size: 1.15rem; }
+.page-hero p { color: #ece6da; max-width: 42rem; margin: 0; font-size: 1.15rem; }
 
 /* ---- Sections ---- */
 .section { padding: clamp(3rem, 7vw, 5rem) 0; }
 .section-alt { background: var(--paper); border-block: 1px solid var(--rule); }
-.section-dark { background: var(--pine-900); color: #e6ede1; }
+.section-dark { background: var(--pine-900); color: #ece6da; }
 .section-dark h2, .section-dark h3 { color: #fff; }
 .section-head { max-width: 44rem; margin-bottom: 2.2rem; }
 .section-head p { color: var(--ink-soft); font-size: 1.1rem; }
-.section-dark .section-head p { color: #cdd8c6; }
+.section-dark .section-head p { color: #d6cdbd; }
 
 .grid { display: grid; gap: 1.25rem; }
 .grid-3 { grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
@@ -214,8 +219,8 @@ a:hover { color: var(--blaze); }
 .stat { display: flex; gap: 1.25rem; align-items: baseline; flex-wrap: wrap; }
 .stat-number { font-family: var(--font-head); font-size: clamp(3.5rem, 10vw, 5.5rem); line-height: 1; color: var(--blaze-lt); font-weight: 700; }
 .stat-label { font-size: 1.2rem; max-width: 24rem; color: #fff; }
-.source { font-size: .85rem; color: #b9c6b2; margin-top: 1rem; }
-.source a { color: #d9e2d0; }
+.source { font-size: .85rem; color: #bfb5a3; margin-top: 1rem; }
+.source a { color: #e0d7c8; }
 
 /* ---- Help / crisis box ---- */
 .help-box {
@@ -261,7 +266,7 @@ a:hover { color: var(--blaze); }
   padding: .7rem .8rem; min-height: 2.9rem;
 }
 .field textarea { min-height: 9rem; resize: vertical; }
-.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--pine-700); outline: 3px solid rgba(200,84,29,.35); outline-offset: 1px; }
+.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--pine-700); outline: 3px solid rgba(122,92,46,.35); outline-offset: 1px; }
 .field-row { display: grid; gap: 1.1rem; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); }
 .hp { position: absolute; left: -9999px; }
 .form-status { padding: .9rem 1rem; border-radius: 8px; font-weight: 600; }
@@ -269,13 +274,13 @@ a:hover { color: var(--blaze); }
 .form-status[data-state="err"] { background: #fbe7e3; color: #7a1f16; }
 
 /* ---- Footer ---- */
-.site-footer { background: var(--pine-900); color: #cdd8c6; padding: 3rem 0 2rem; font-size: .95rem; }
+.site-footer { background: var(--pine-900); color: #d6cdbd; padding: 3rem 0 2rem; font-size: .95rem; }
 .site-footer a { color: #fff; }
 .site-footer a:hover { color: var(--blaze-lt); }
 .footer-grid { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); }
 .site-footer h2 { color: #fff; font-size: 1.05rem; font-family: var(--font); text-transform: uppercase; letter-spacing: .12em; }
 .site-footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .45rem; }
-.footer-legal { border-top: 1px solid var(--pine-700); margin-top: 2.5rem; padding-top: 1.25rem; font-size: .85rem; color: #aab8a3; }
+.footer-legal { border-top: 1px solid var(--pine-700); margin-top: 2.5rem; padding-top: 1.25rem; font-size: .85rem; color: #b3a996; }
 
 /* ---- Utilities ----
    The CSP is style-src 'self', so inline style="" attributes are blocked in
@@ -292,6 +297,12 @@ a:hover { color: var(--blaze); }
 .eyebrow-blaze { color: var(--blaze); }
 .wrap-narrow { --max: 40rem; }
 .plain-list  { margin: 0; padding-left: 1.2rem; }
+.about-badge { display: block; width: 100%; max-width: 480px; height: auto; border-radius: var(--radius); margin-bottom: 1.5rem; }
+
+/* Coyote brown is too dark to show against the drab bands; switch to tan there. */
+.site-header :focus-visible, .hero :focus-visible, .section-dark :focus-visible, .site-footer :focus-visible { outline-color: var(--blaze-lt); }
+.on-dark .btn-primary { background: var(--blaze-lt); color: var(--pine-900); }
+.on-dark .btn-primary:hover { background: #c8ad80; color: var(--pine-900); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
